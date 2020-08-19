@@ -90,6 +90,7 @@ interface Props {
   authenticationMode?: 'PASSWORD' | 'AAI' | 'NONE'
   storageMode?: 'SECRET' | 'COMPLETE'
   subscribeToMore: Function
+  userCount: number
 }
 
 const defaultProps = {
@@ -125,6 +126,7 @@ function SessionTimeline({
   handleResetQuestionBlock,
   handleActivateBlockById,
   subscribeToMore,
+  userCount,
 }: Props): React.ReactElement {
   useEffect((): void => {
     subscribeToMore()
@@ -139,8 +141,14 @@ function SessionTimeline({
           <div className="startingTime">
             <Icon name="time" /> {startedAt}
           </div>
+          <div>
+            <h1>{activeStep}</h1>
+          </div>
           <div className="runningTime">
             <Icon name="play circle" /> {runtime}
+          </div>
+          <div className="participantsCounter">
+            <Icon name="users" /> {userCount}
           </div>
         </div>
 
@@ -395,7 +403,8 @@ function SessionTimeline({
               margin: 0;
             }
 
-            .runningTime {
+            .runningTime,
+            .participantsCounter {
               margin-left: 2rem;
             }
 

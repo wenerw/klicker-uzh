@@ -5,6 +5,7 @@ query RunningSession {
     startedAt
     activeStep
     activeBlock
+    userCount
     blocks {
       id
       status
@@ -48,10 +49,6 @@ query RunningSession {
       isFeedbackChannelPublic
       authenticationMode
       storageMode
-    }
-    participants {
-      username
-      password
     }
   }
 }

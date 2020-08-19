@@ -2,7 +2,7 @@ subscription RunningSessionUpdated($sessionId: ID!) {
   runningSessionUpdated(sessionId: $sessionId) {
     id
     activeStep
-    activeBlock
+    userCount
     blocks {
       id
       status

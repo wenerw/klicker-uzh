@@ -115,6 +115,7 @@ function Running(): React.ReactElement {
           confusionTS,
           feedbacks,
           participants,
+          userCount,
         } = data.runningSession
 
         return (
@@ -238,12 +239,13 @@ function Running(): React.ReactElement {
                       ...prev,
                       runningSession: {
                         ...prev.runningSession,
-                        ..._pick(subscriptionData.data.runningSessionUpdated, ['activeBlock', 'activeStep']),
+                        ..._pick(subscriptionData.data.runningSessionUpdated, ['activeStep']),
                       },
                     }
                   },
                   variables: { sessionId: id },
                 })}
+                userCount={userCount}
               />
             </div>
 
@@ -337,40 +339,31 @@ function Running(): React.ReactElement {
 
       <style jsx>{`
         @import 'src/theme';
-
         .runningSession {
           display: flex;
           flex-direction: column;
-
           padding: 1rem;
         }
-
         .sessionProgress,
         .confusionBarometer,
         .feedbackChannel {
           flex: 1;
-
           margin-bottom: 1rem;
         }
-
         a.participantListTrigger {
           cursor: pointer;
           margin-left: 0.5rem;
         }
-
         @include desktop-tablet-only {
           .runningSession {
             flex-flow: row wrap;
-
             padding: 2rem;
           }
-
           .sessionProgress,
           .confusionBarometer,
           .feedbackChannel {
             padding: 0.5rem;
           }
-
           .sessionProgress {
             flex: 0 0 100%;
             max-width: 100%;
@@ -379,7 +372,6 @@ function Running(): React.ReactElement {
             flex: 0 0 40%;
           }
         }
-
         @include desktop-only {
           .runningSession {
             padding: 2rem 10%;
