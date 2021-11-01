@@ -2,23 +2,17 @@
 
 !public/
 !src/
-!dist/
-!compiled-lang/
+!lang/
 src/stories/
 
-!LICENSE.md
-
+!.babelrc
+!next-env.d.ts
+!next.config.js
 !package.json
 !package-lock.json
-
-!.babelrc
-!tsconfig.json
-!next.config.js
-!server.ts
-!next-env.d.ts
 !postcss.config.js
-!tailwind.config.js
-!sentry.*.js
 !semantic.json
-!polyfills.ts
+!sentry.*.js
+!tailwind.config.js
+!tsconfig.json
 !tsconfig.server.json
