@@ -7,6 +7,7 @@ const { QuestionOptions } = require('./QuestionOptions')
 const QuestionVersion = require('./QuestionVersion')
 const QuestionInstanceModel = require('./QuestionInstance')
 const { SessionModel } = require('./Session')
+const { LearningBlockModel } = require('./LearningBlock')
 const SessionParticipant = require('./SessionParticipant')
 const TagModel = require('./Tag')
 const UserModel = require('./User')
@@ -24,4 +25,5 @@ module.exports = {
   TagModel,
   UserModel,
   SessionParticipant,
+  LearningBlockModel,
 }

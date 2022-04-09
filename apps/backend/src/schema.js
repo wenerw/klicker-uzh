@@ -58,6 +58,7 @@ const {
   loginParticipant,
 } = require('./resolvers/sessions')
 const { allTags, tags } = require('./resolvers/tags')
+const { allLearningBlocks, joinLearningBlock, createLearningBlock } = require('./resolvers/learningBlocks')
 const {
   allUsers,
   createUser,
@@ -123,12 +124,14 @@ const typeDefs = [
     allQuestions: [Question]!
     allRunningSessions: [Session]!
     allSessions: [Session]!
+    allLearningBlocks: [LearningBlock]!
     allTags: [Tag]!
     allUsers: [User]!
     checkAccountStatus: ID
     checkAvailability(email: String, shortname: String): User_Availability!
     joinQA(shortname: String!): [Session_Feedback_Public!]
     joinSession(shortname: String!): Session_Public
+    joinLearningBlock(id: ID!): LearningBlock
     question(id: ID!): Question
     runningSessionId: ID
     runningSession: Session
@@ -157,6 +160,7 @@ const typeDefs = [
     changePassword(newPassword: String!): User!
     createQuestion(question: QuestionInput!): Question!
     createSession(session: SessionInput!): Session!
+    createLearningBlock(learningBlock: LearningBlockInput!): LearningBlock!
     createUser(email: String!, password: String!, shortname: String!, institution: String!, useCase: String): User!
     deleteFeedback(sessionId: ID!, feedbackId: ID!): Session!
     deleteQuestions(ids: [ID!]!): String!
@@ -213,12 +217,14 @@ const resolvers = {
     allQuestions,
     allRunningSessions,
     allSessions,
+    allLearningBlocks,
     allTags,
     allUsers,
     checkAccountStatus,
     checkAvailability,
     joinSession,
     joinQA,
+    joinLearningBlock,
     question,
     runningSession,
     runningSessionId,
@@ -272,6 +278,7 @@ const resolvers = {
     exportQuestions,
     upvoteFeedback,
     reactToFeedbackResponse,
+    createLearningBlock,
   },
   Subscription: {
     // TODO: some form of authentication
@@ -318,6 +325,9 @@ const resolvers = {
       return null
     },
   },
+  LearningBlock: {
+    instances: questionInstancesByPV,
+  },
   QuestionInstance: {
     question: questionByPV,
     responses: responsesByPV,
@@ -325,6 +335,10 @@ const resolvers = {
     session: (pv) => String(pv.session), // HACK: fix broken ID coercion of graphql 14.0.0
   },
   QuestionInstance_Public: {
+    question: questionByPV,
+    results: resultsByPV,
+  },
+  QuestionInstance_LearningBlock: {
     question: questionByPV,
     results: resultsByPV,
   },

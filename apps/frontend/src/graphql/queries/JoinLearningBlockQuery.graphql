@@ -1,0 +1,41 @@
+query JoinLearningBlock($id: ID!) {
+  joinLearningBlock(id: $id) {
+    id
+    instances {
+      id
+      question {
+        title
+        content
+        type
+        options {
+          FREE_RANGE {
+            restrictions {
+              min
+              max
+            }
+          }
+          SC {
+            choices {
+              correct
+              name
+            }
+            randomized
+          }
+          MC {
+            choices {
+              correct
+              name
+            }
+            randomized
+          }
+        }
+        files {
+          id
+          name
+          type
+          description
+        }
+      }
+    }
+  }
+}

@@ -16,9 +16,11 @@ import { PageWithFeatureFlags } from '../../@types/AppFlags'
 import TeacherLayout from '../../components/layouts/TeacherLayout'
 import useSelection from '../../lib/hooks/useSelection'
 import useSortingAndFiltering from '../../lib/hooks/useSortingAndFiltering'
+import CreateLearningBlockMutation from '../../graphql/mutations/CreateLearningBlockMutation.graphql'
 import CreateSessionMutation from '../../graphql/mutations/CreateSessionMutation.graphql'
 import StartSessionMutation from '../../graphql/mutations/StartSessionMutation.graphql'
 import AccountSummaryQuery from '../../graphql/queries/AccountSummaryQuery.graphql'
+import LearningBlockListQuery from '../../graphql/queries/LearningBlockListQuery.graphql'
 import SessionListQuery from '../../graphql/queries/SessionListQuery.graphql'
 import RunningSessionQuery from '../../graphql/queries/RunningSessionQuery.graphql'
 import QuestionPoolQuery from '../../graphql/queries/QuestionPoolQuery.graphql'
@@ -83,6 +85,7 @@ function Index({ featureFlags }: PageWithFeatureFlags): React.ReactElement {
   const [archiveQuestions, { loading: isArchiveQuestionsLoading }] = useMutation(ArchiveQuestionsMutation)
   const [modifySession, { loading: isModifySessionLoading }] = useMutation(ModifySessionMutation)
   const [deleteQuestions, { loading: isDeleteQuestionsLoading }] = useMutation(DeleteQuestionsMutation)
+  const [createLearningBlock, { loading: isCreateLearningBlockLoading }] = useMutation(CreateLearningBlockMutation)
   const { data, loading } = useQuery(QuestionPoolQuery)
 
   const [selectedItems, handleSelectItem, handleResetSelection, handleSelectItems] = useSelection()
@@ -224,6 +227,24 @@ function Index({ featureFlags }: PageWithFeatureFlags): React.ReactElement {
     ])
 
     push(['trackEvent', 'Question Pool', 'Quick Blocks Created', selectedItems.items.length])
+  }
+
+  const onCreateLearningBlock = async (e) => {
+    // prevent a page reload on submit
+    e.preventDefault()
+
+    if (!selectedItems.items?.length) return
+
+    // create a new session
+    const result = await createLearningBlock({
+      refetchQueries: [{ query: LearningBlockListQuery }],
+      variables: {
+        questionIds: selectedItems.items.map((item) => item.id),
+        name: 'some learning block',
+      },
+    })
+
+    console.log(result)
   }
 
   // handle creating a new session
@@ -488,6 +509,7 @@ function Index({ featureFlags }: PageWithFeatureFlags): React.ReactElement {
                 creationMode={creationMode}
                 deletionConfirmation={deletionConfirmation}
                 handleArchiveQuestions={onArchiveQuestions}
+                handleCreateLearningBlock={onCreateLearningBlock}
                 handleCreationModeToggle={onCreationModeToggle}
                 handleDeleteQuestions={onDeleteQuestions}
                 handleQuesionViewChange={onChangeQuestionView}

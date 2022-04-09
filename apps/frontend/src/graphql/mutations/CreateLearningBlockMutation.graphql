@@ -1,0 +1,8 @@
+mutation CreateLearningBlock($name: String!, $questionIds: [ID!]!) {
+  createLearningBlock(learningBlock: { name: $name, questionIds: $questionIds }) {
+    id
+    instances {
+      id
+    }
+  }
+}

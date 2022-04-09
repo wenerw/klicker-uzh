@@ -33,4 +33,9 @@ module.exports = `
     question: Question_PublicEvaluation!
     results: QuestionInstance_Results
   }
+  type QuestionInstance_LearningBlock {
+    id: ID!
+    question: Question_Public!
+    results: QuestionInstance_Results
+  }
 `

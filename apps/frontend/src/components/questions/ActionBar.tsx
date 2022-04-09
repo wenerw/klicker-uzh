@@ -46,6 +46,7 @@ interface Props {
   handleSetItemsChecked: any
   handleResetItemsChecked: any
   handleQuesionViewChange: any
+  handleCreateLearningBlock: any
   isArchiveActive?: boolean
   isViewToggleVisible?: boolean
   itemsChecked?: string[]
@@ -76,6 +77,7 @@ function ActionBar({
   handleSetItemsChecked,
   handleResetItemsChecked,
   handleQuesionViewChange,
+  handleCreateLearningBlock,
   questions,
 }: Props): React.ReactElement {
   const intl = useIntl()
@@ -212,6 +214,10 @@ function ActionBar({
             <Dropdown.Item disabled={!!creationMode} onClick={handleCreationModeToggle}>
               <Icon name="play" />
               <FormattedMessage defaultMessage="New Session" id="questionPool.button.createSession" />
+            </Dropdown.Item>
+            <Dropdown.Item onClick={handleCreateLearningBlock}>
+              <Icon name="idea" />
+              <FormattedMessage defaultMessage="New Learning Block" id="questionPool.button.createLearningBlock" />
             </Dropdown.Item>
             <QuestionCreationModal handleModalOpenChange={setIsAnyModalOpen}>
               {({ setIsModalOpen }): any => (

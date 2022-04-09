@@ -33,7 +33,13 @@ const QuestionInstance = new mongoose.Schema(
     session: {
       type: ObjectId,
       ref: 'Session',
-      required: true,
+      required: false,
+      index: true,
+    },
+    learningBlock: {
+      type: ObjectId,
+      ref: 'LearningBlock',
+      required: false,
       index: true,
     },
     user: {

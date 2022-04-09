@@ -1,0 +1,13 @@
+query LearningBlockList {
+  learningBlocks: allLearningBlocks {
+    id
+    name
+
+    instances {
+      id
+    }
+
+    createdAt
+    updatedAt
+  }
+}

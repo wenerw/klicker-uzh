@@ -78,6 +78,12 @@ const pages = [
     url: '/join/:shortname',
   },
   {
+    cached: 60,
+    mapParams: (req) => ({ id: req.params.id }),
+    renderPath: '/learningBlocks/[id]',
+    url: '/learningBlocks/:id',
+  },
+  {
     mapParams: (req) => ({ shortname: req.params.shortname, sessionId: req.params.sessionId }),
     renderPath: '/login',
     url: '/login/:shortname/:sessionId',

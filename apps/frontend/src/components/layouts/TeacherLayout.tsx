@@ -46,6 +46,11 @@ function TeacherLayout({ actionArea, children, fixedHeight, navbar, pageTitle, s
       name: 'sessionList',
     },
     {
+      href: '/learningBlocks',
+      label: <FormattedMessage defaultMessage="Learning Blocks" id="learningBlocks.title" />,
+      name: 'learningBlocks',
+    },
+    {
       href: '/sessions/running',
       label: <FormattedMessage defaultMessage="Running Session" id="runningSession.title" />,
       name: 'runningSession',

@@ -47,6 +47,7 @@ const User = new mongoose.Schema(
     tags: [{ type: ObjectId, ref: 'Tag' }],
     questions: [{ type: ObjectId, ref: 'Question' }],
     sessions: [{ type: ObjectId, ref: 'Session' }],
+    learningBlocks: [{ type: ObjectId, ref: 'LearningBlock' }],
 
     runningSession: { type: ObjectId, ref: 'Session' },
 

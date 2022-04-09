@@ -3,6 +3,7 @@ const Question = require('./Question')
 const QuestionStatistics = require('./QuestionStatistics')
 const QuestionInstance = require('./QuestionInstance')
 const Session = require('./Session')
+const LearningBlock = require('./LearningBlock')
 const Tag = require('./Tag')
 const User = require('./User')
 const SCQuestionOptions = require('./questionTypes/SCQuestionOptions')
@@ -21,6 +22,7 @@ module.exports = {
     FREEQuestionOptions,
     FREEQuestionResults,
     Session,
+    LearningBlock,
     Tag,
     User,
   ],
@@ -33,6 +35,7 @@ module.exports = {
   FREEQuestionOptions,
   FREEQuestionResults,
   Session,
+  LearningBlock,
   Tag,
   User,
 }
